@@ -84,7 +84,20 @@
             }
 
             // create and play explosion sound
-            
+            let explosion  = document.createElement('audio'); //creates audio tag for element
+
+            explosion.src = "audio/explosion.mp3"; //where to find the audio file and load it
+            explosion.load();
+
+            //get rid of child element when we are done with it
+            //this cleans up the back-end script so we don't clutter memory or app
+            explosion.addEventListener('ended', function() { //listens for audio to stop playing
+              document.body.removeChild(explosion); //removes child element so we dont get a stack in console
+            });
+
+            document.body.appendChild(explosion); //make laser child element of body
+            explosion.play();
+
           }
         });
 
@@ -123,7 +136,7 @@
       window.requestAnimationFrame(draw);
   }
 
-  
+
   function createBullet() {
     // create / draw a bullet and push it into the bullet array
     let newBullet = {
@@ -137,7 +150,18 @@
     bullets.push(newBullet);
 
     // create and play cheesy laser sound
-    
+    let laser  = document.createElement('audio'); //creates audio tag for element
+
+    laser.src = "audio/laser.mp3"; //where to find the audio file and load it
+    laser.load();
+
+    laser.addEventListener('ended', function() { //listens for audio to stop playing
+      document.body.removeChild(laser); //removes child element so we dont get a stack in console
+    });
+
+    document.body.appendChild(laser); //make laser child element of body
+    laser.play();
+
   }
 
   function movePlayer(e) {
